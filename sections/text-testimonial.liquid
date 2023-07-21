@@ -1,0 +1,142 @@
+<div class="shipping-{{ section.id }}">
+
+ <div class="shipping wrapper test_542184185">
+       {% for block in section.blocks %}
+           {% if block.type == 'column'%}
+             {%if block.settings.url != blank %}
+         <a href="{{ block.settings.url }}">
+               {% endif %}
+        <div style="text-align: center;" class="shipping-1 block-{{ block.id }}">
+         <style>
+               .block-{{ block.id }} {
+                 background-color  : {{ block.settings.bg_color }};
+               }
+             </style>
+            <p class="descr">
+               {{ block.settings.title }}
+            </p>
+        
+           <p>
+               {{ block.settings.description }}
+            </p>
+      
+         
+               <img style="max-width:150px "src="{{ block.settings.image | img_url:"master" }}" alt="">
+        </div>
+             {%if block.settings.url != blank %}
+         </a>
+               {% endif %}
+            {% endif %}
+        {% endfor %}
+        
+    </div>
+  
+</div>
+
+<style>
+
+   .shipping-{{ section.id }}{
+    background-color : {{ section.settings.bg_color }};
+  }
+
+ #shopify-section-{{section.id}} .shipping{
+   overflow:hidden;
+ }
+
+  
+ #shopify-section-{{section.id}} .shipping-1 .descr{
+      max-width: 63%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+   #shopify-section-{{section.id}} .shipping-1 img {
+     border-top: 3px solid black;
+   }
+/*   #shopify-section-{{section.id}} .shipping {
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1000px;
+    margin-inline: auto;
+    gap: 20px;
+    position: relative;
+    display: flex;
+    margin-top: 36px;
+} */
+  #shopify-section-{{section.id}} hr{
+    width:30px;
+  }
+
+  
+  
+  #shopify-section{{section.id}} .shipping .shipping-1{
+    display:flex;
+    max-width:33%;
+  }
+  @media screen and (max-width: 649px){
+    .shipping-{{ section.id }} .shipping.wrapper{
+      flex-direction: column;
+    }
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Text Testimonial",
+    "settings": [
+ {
+        "type": "color",
+        "label" :"Background Color",
+        "id": "bg_color"
+      }
+    ],
+     "blocks": [
+    {
+      "type": "column",
+      "name": "t:sections.multicolumn.blocks.column.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.multicolumn.blocks.column.settings.image.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Column",
+          "label": "t:sections.multicolumn.blocks.column.settings.title.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+        "type": "color",
+        "label" :"Background Color",
+        "id": "bg_color"
+      }
+       
+      ]
+    }
+  ],
+    "presets": [
+    {
+      "name": "Text Testimonial",
+      "blocks": [
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}
+

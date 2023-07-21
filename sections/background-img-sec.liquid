@@ -1,0 +1,119 @@
+<section class="section-class" style="background-image: url('{{ section.settings.image | img_url: "master" }}');">
+
+   
+<div class="content-1 page-width">
+            <p class="title">
+               {{ section.settings.title }}
+            </p>
+     
+           <p class="desc">
+               {{ section.settings.description }}
+            </p>
+       
+       
+     <a href="{{ section.settings.url }}" class="button261"> {{ section.settings.text }}</a>
+   
+  </div>
+  
+  
+  
+</section>
+  
+
+<style>
+
+  #shopify-section-{{section.id}} .section-class {
+   background-repeat: no-repeat;
+    width: 100%;
+    height: 450px;
+    background-size: cover;
+     margin-bottom: -36px;
+
+}
+ 
+ #shopify-section-{{section.id}} .content-1 {
+     margin-left: 62px;
+    margin-top: 36px;
+    color: Black;
+    padding-top: 60px;
+ }
+   .button261 {
+     height: 46px;
+     padding: 10px 20px;
+     border-radius: 25px;
+     background-color:#262524;
+     color: #ffffff;
+     text-align: center;
+     text-decoration: none;
+     
+}
+  #shopify-section-{{section.id}} .button261:hover{
+    Color:#262524;
+    background-color:#ffffff;
+  }
+#shopify-section-{{section.id}} .title{
+    margin: -3px;
+    font-size: x-large;
+    font-weight: bold;
+/*     width: 20%; */
+}
+}
+ #shopify-section-{{section.id}} .desc{
+     width: 186px;
+    
+}
+     @media screen and (max-width: 600px) {
+          .content-1 .title p{
+      width: 173px;
+    }
+    }
+ 
+  
+  </style>
+
+
+{% schema %}
+   {
+    "name": "Custom image with text",
+    "settings": [
+ {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        },
+      {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.multicolumn.blocks.column.settings.title.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "description",
+          "label": "Description"
+        },
+         {
+          "type": "url",
+          "id": "btn",
+          "label": "Button Link"
+        },
+         {
+          "type": "text",
+          "id": "text",
+          "label": "Button Text"
+        }
+      
+    ],
+    "presets": [
+    {
+      "name": "Custom image with text"
+   
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

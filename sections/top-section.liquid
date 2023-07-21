@@ -1,0 +1,328 @@
+{% if section.settings.message %}
+  {% if section.settings.home_page_only == false or template.name == 'index' %}
+  <style>
+    .announcement-bar {
+      background-color: {{ section.settings.color_bg }};
+      text-align:center;
+      {% if section.settings.header_padding > 0 %}
+        position:absolute;
+        top: -{{ section.settings.header_padding }}px !important;
+        left:0;
+        width:100%;
+        z-index:9;
+      {% endif %}
+    }
+    .announcement-bar p {
+      padding:10px 0;
+      font-size: {{ section.settings.font_size }}px;
+      margin:0 !important;
+    }
+    .announcement-bar__message,
+    .announcement-bar--link {
+      color: {{ section.settings.color_text }};
+    }
+    .announcement-bar--link:hover, 
+    .announcement-bar--link:hover .announcement-bar__message {
+      color: {{ section.settings.color_text_hover }} !important;
+    }
+    body {
+      position:relative;
+      top: {{ section.settings.header_padding }}px !important;
+    }
+  .announcement-bar-parent {
+      width: 70%;
+    text-decoration: none;
+    }
+   
+      .links-tab {
+        width: 30%;
+        padding: 10px 0;
+      }
+     .links-tab a {
+/*         text-decoration:none; */
+           color:white;
+           margin: 5px;
+           float: left;
+      }
+    .announcement-bar__message{
+     width: 50%;
+    }
+  </style>
+  
+  <div class="parent-div announcement-bar">
+    
+     <div class="links-tab ">
+     
+         <a href="{{ section.settings.url-1 }}" class="waranty-top-bar"> {{ section.settings['btn-text-1'] }}</a>
+          <a href="{{ section.settings.url-2  }}" class="contact-top-bar"> {{ section.settings['btn-text-2'] }}</a>
+      </div>
+  
+  {% if section.settings.message_link == blank %}
+
+  <div class="text-area">
+     
+    {% else %}
+    
+    <a href="{{ section.settings.message_link }}" class="announcement-bar-parent announcement-bar--link">
+         
+      {% endif %}
+ 
+      {% capture shipping_value %}{{ section.settings.free_shipping_threshold | times: 100 }}{% endcapture %}
+      {% assign cart_total = cart.total_price %}
+      {% assign shipping_value_left = shipping_value | minus: cart_total %}
+      {% assign shipping_value_left_money = shipping_value_left | money %}
+      {% capture free_shipping_notqualified %}
+        {{ section.settings.free_shipping_notqualified | replace: '[price]', shipping_value_left_money }}
+      {% endcapture %}
+      {% assign free_shipping_qualified = section.settings.free_shipping_qualified %}
+      {% assign announcement_message = section.settings.message_text %}
+      
+      {% if section.settings.free_shipping_countdown %}
+        {% if cart.total_price > 0 %}
+          {% assign announcement_message = free_shipping_notqualified %}
+        {% endif %}
+        {% if shipping_value_left <= 0 %}
+          {% assign announcement_message = free_shipping_qualified %}
+        {% endif %}
+      {% endif %}
+
+     
+      
+      <p class="announcement-bar__message">{{ announcement_message }}</p>   
+ 
+      {% if section.settings.message_link == blank %}
+      </div>
+    {% else %}
+      
+    </a>
+   
+  {% endif %}
+ 
+  {% endif %}
+{% endif %}
+ </div>
+
+<p id="demo"></p>
+
+
+
+ <script>
+// Set the date we're counting down to
+var countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
+ 
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+
+{% if settings.enable-custom == true %}
+  <style>
+    {% assign sectionClasses = 'contact-top-bar' | split: ', ' %}
+    {% for class in sectionClasses %}
+      .{{ class }} {
+        font-family: {{ settings.custom-fonts }} !important;
+      }
+    {% endfor %}
+  </style>
+{% endif %}
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Announcement bar 2",
+    "settings": [
+ {
+  "type": "checkbox",
+  "id": "enable-custom",
+  "label": "Enable Custom Font",
+  "default": false
+},
+{
+  "type": "select",
+  "id": "heading-font",
+  "label": "Heading Font",
+  "options": [
+    {
+      "value": "tstarw00-boldregular",
+      "label": "Bold Regular"
+    },
+    {
+      "value": "tstarw00-italicregular",
+      "label": "Italic Regular"
+    },
+    {
+      "value": "tstarw00-heavyregular",
+      "label": "Heavy Regular"
+    },
+    {
+      "value": "tstarw00-lightregular",
+      "label": "Light Regular"
+    }
+  ],
+  "default": "tstarw00-boldregular"
+},
+       {
+        "type": "text",
+        "id": "btn-text-1",
+        "label": "Waranty",
+        "default": "Announce something here"
+      },
+      {
+        "type": "text",
+        "id": "btn-text-2",
+        "label": "Contact",
+        "default": "Announce something here"
+      },
+       {
+        "type": "url",
+        "id": "url",
+        "label": "Link",
+        "info": "Optional"
+      },
+       {
+        "type": "url",
+        "id": "url-2",
+        "label": "Link",
+        "info": "Optional"
+      },
+      
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "checkbox",
+        "id": "message",
+        "label": "Show announcement",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "home_page_only",
+        "label": "Home page only",
+        "default": false
+      },
+    {
+        "type":   "range",
+        "id":     "header_padding",
+        "min":    0,
+        "max":    100,
+        "step":   1,
+        "unit":   "px",
+        "label":  "Header padding",
+        "default":   0,
+    "info":   "Pushes page content down below announcement bar (only needed on some themes)"
+      },
+    {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "message_text",
+        "label": "Text",
+        "default": "Announce something here"
+      },
+    {
+        "type": "checkbox",
+        "id": "free_shipping_countdown",
+        "label": "Show free shipping countdown",
+    "info": "Tells the customer how much they need to add to their cart to receive free shipping (only appears when at least one item is in the cart).",
+        "default": false
+      },
+    {
+        "type":   "range",
+        "id":     "free_shipping_threshold",
+        "min":    5,
+        "max":    100,
+        "step":   1,
+        "unit":   "$",
+        "label":  "Free shipping threshold",
+        "default":   25,
+    "info":   "The amount at which customers receive free shipping (must match your shipping settings)."
+      },
+    {
+        "type": "textarea",
+        "id": "free_shipping_notqualified",
+        "label": "Free shipping (not qualified) message",
+        "default": "Add just [price] to your cart to receive free shipping!"
+      },
+    {
+        "type": "textarea",
+        "id": "free_shipping_qualified",
+        "label": "Free shipping (qualified) message",
+        "default": "Your order qualifies for free shipping!"
+      },
+      {
+        "type": "url",
+        "id": "message_link",
+        "label": "Link",
+        "info": "Optional"
+      },
+    {
+        "type": "header",
+        "content": "Fonts and colors"
+      },
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Background color",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text color",
+        "default": "#ffffff"
+      },
+    {
+        "type": "color",
+        "id": "color_text_hover",
+        "label": "Link hover color",
+        "default": "#eeeeee"
+      },
+    {
+        "type":   "range",
+        "id":     "font_size",
+        "min":    8,
+        "max":    36,
+        "step":   1,
+        "unit":   "px",
+        "label":  "Font size",
+        "default":   14
+      }
+    ],
+       "presets": [
+      {
+        "name": "second announcement bar "
+      }
+    ]
+} 
+
+{% endschema %}

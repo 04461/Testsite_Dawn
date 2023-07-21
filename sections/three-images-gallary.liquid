@@ -1,0 +1,229 @@
+<div class=" page-width logo-list-section section-2-{{ section.id }}">
+  <div class="card1">
+    <img class="img1" loading="lazy" src="{{ section.settings.image1 | img_url: '1048x1048' }}">
+    <img class="img2" loading="lazy" src="{{ section.settings.image2 | img_url: '1048x1048' }}">
+    <img class="img3" loading="lazy" src="{{ section.settings.image3 | img_url: '1048x1048' }}">
+  </div>
+  {% comment %}
+    <div class="card1-hover">
+      <img class="hover-image" loading="lazy" src="{{ section.settings.hoverImage1 | img_url: '1048x1048' }}">
+      <img class="hover-image" loading="lazy" src="{{ section.settings.hoverImage2 | img_url: '1048x1048' }}">
+      <img class="hover-image" loading="lazy" src="{{ section.settings.hoverImage3 | img_url: '1048x1048' }}">
+    </div>
+  {% endcomment %}
+
+  <div class="text">
+    <h2>{{ section.settings.desc1 }}</h2>
+    <p>{{ section.settings.desc }}</p>
+    <a href="{{ section.settings.url }}" class="button262"> {{ section.settings['btn-text'] }}</a>
+  </div>
+  <!--
+    <div class="btn_bg-image">
+       <a href="{{ section.settings.url }}" class="button262"> {{ section.settings.btn-text }}</a>
+    </div>
+  -->
+</div>
+
+<style>
+      #shopify-section-{{section.id}} .card1 [class^="img"] {
+      transition: all 1.0s;
+      box-sizing: border-box;
+      max-width: 100%;
+    }
+    /*       #shopify-section-{{section.id}} .card1 .img1 {
+          transition: all 1.0s;
+          box-sizing: border-box;
+          max-width: 100%;
+        } */
+    /*    #shopify-section-{{section.id}} .card1 .img2 {
+          transition: all 1.0s;
+          box-sizing: border-box;
+          max-width: 100%;
+        } */
+    /*      #shopify-section-{{section.id}} .card1 .img3 {
+          transition: all 1.0s;
+          box-sizing: border-box;
+          max-width: 100%;
+        } */
+
+    #shopify-section-{{section.id}} .card1 .img1:hover,
+    #shopify-section-{{section.id}} .card1 .img2:hover,
+    #shopify-section-{{section.id}} .card1 .img3:hover {
+      transform: scale(1.2) rotateY(180deg);
+    }
+
+           #shopify-section-{{section.id}} .button262 {
+               height: 46px;
+               padding: 10px 20px;
+               border-radius: 25px;
+               background-color:#262524;
+               color: #ffffff;
+               text-align: center;
+               text-decoration: none;
+
+          }
+
+            #shopify-section-{{section.id}} .button262:hover{
+              Color:#262524;
+              background-color:#ffffff;
+            }
+
+            #shopify-section-{{ section.id }} .section-2-{{ section.id }}{
+            background-color: {{ section.settings.bg_color }};
+            }
+
+              .logo-list-section {
+          /*       max-width:100%; */
+                display:flex;
+                overflow:hidden;
+            }
+              .card1 img{
+          /*       width: 26%; */
+                padding: 21px;
+                display:flex;
+                overflow:hidden;
+              }
+            .card1{
+              max-width: 70%;
+              width: 100%;
+              display:flex;
+          /*     margin-right: -55px;
+              padding-left: 69px; */
+              overflow:hidden;
+            }
+              .text{
+                  width: 40%;
+                  overflow:hidden;
+                  padding: 41px;
+
+              }
+
+              .text h2 {
+                font-weight: bold;
+              }
+          /*    .text p {
+                text-align:center;
+              } */
+
+
+               @media screen and (max-width: 768px) {
+               .text {
+                width: 90%;
+                height: 300px;
+              }
+              }
+
+
+               @media screen and (max-width: 768px) {
+              /* mobile and small tablet screens */
+
+
+             .card1 img{
+  /*            width: 100%; */
+                align-item:center;
+               Margin-left:50px
+                padding: 5px;
+               flex-direction:column;
+              }
+                 .logo-list-section,
+              .card1{
+                flex-direction: column;
+              }
+              }
+              @media screen and (max-width: 768px) {
+          .text h2 {
+               margin-left:15px;
+              text-align: center;
+              }
+              }
+             @media screen and (max-width: 768px) {
+               .text p{
+               margin-left: 40px;
+               text-align: center;
+              }
+              }
+             @media screen and (max-width: 768px) {
+               .text a{
+                margin-left: 70px;
+              }
+              }
+</style>
+
+{% schema %}
+{
+    "name": "Images",
+    "settings": [
+       {
+        "type": "color",
+        "label" :"Background Color",
+        "id": "bg_color"
+      },
+               {
+                    "type": "image_picker",
+                    "id": "image1",
+                    "label": "Image"
+                },
+      {
+                    "type": "image_picker",
+                    "id": "image2",
+                    "label": "Image"
+                },
+      {
+                    "type": "image_picker",
+                    "id": "image3",
+                    "label": "Image"
+                },
+       {
+                    "type": "image_picker",
+                    "id": "hoverImage1",
+                    "label": "Hover Image1"
+                },
+         {
+                    "type": "image_picker",
+                    "id": "hoverImage2",
+                    "label": "Hover Image2"
+                },
+         {
+                    "type": "image_picker",
+                    "id": "hoverImage3",
+                    "label": "Hover Image3"
+                },
+       {
+                    "type": "richtext",
+                    "id": "desc",
+                    "label": "Description"
+                },
+       {
+                    "type": "text",
+                    "id": "desc1",
+                    "label": "Heading"
+                },
+      {
+                    "type": "url",
+                    "id": "url",
+                   "label" : "button link"
+                },
+      {
+                    "type": "text",
+                    "id": "btn-text",
+                    "label" : "button text"
+                }
+
+
+    ],
+
+
+    "presets": [
+    {
+      "name": "3 Images Gallary"
+
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
