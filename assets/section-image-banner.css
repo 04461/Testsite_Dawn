@@ -399,12 +399,15 @@
 
 .banner__heading {
   margin-bottom: 0;
+}
 
+.banner__heading {
+  color: brown !important;
 }
 
 .banner__box .banner__heading+* {
   margin-top: 1rem;
-  color: blue;
+
 }
 
 .banner__buttons {
