@@ -864,12 +864,12 @@
         "subtitle": "Get inspired by other customers",
         "heading_alignment": "center",
         "image_width": "full",
-        "image_ratio": "adapt",
-        "column_alignment": "left",
+        "image_ratio": "circle",
+        "column_alignment": "center",
         "background_style": "primary",
         "swipe_on_mobile": false,
         "star_color": "#ffcc33",
-        "testimonial_background": "#ffffff",
+        "testimonial_background": "#ead6d6",
         "testimonial_section_background": "#eaeaea"
       }
     }
