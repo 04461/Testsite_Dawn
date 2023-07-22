@@ -863,7 +863,7 @@
         "title": "Testimonials",
         "subtitle": "Get inspired by other customers",
         "heading_alignment": "center",
-        "image_width": "full",
+        "image_width": "third",
         "image_ratio": "circle",
         "column_alignment": "center",
         "background_style": "primary",
