@@ -867,10 +867,10 @@
         "image_ratio": "circle",
         "column_alignment": "center",
         "background_style": "primary",
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "star_color": "#ffcc33",
         "testimonial_background": "#ead6d6",
-        "testimonial_section_background": "#eaeaea"
+        "testimonial_section_background": "#fae8e8"
       }
     }
   },
